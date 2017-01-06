@@ -1,15 +1,23 @@
-*.class
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+.DS_Store?
+*~
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# Folder config file
+Desktop.ini
 
-# Package Files #
-*.jar
-*.war
-*.ear
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
 
 # =========================
 # Operating System Files
@@ -39,25 +47,54 @@ hs_err_pid*
 Network Trash Folder
 Temporary Items
 .apdisk
-
-# Windows
 # =========================
+# for Android studio
+# =========================
+# Built application files
+/*/build/
+/build
+build/
 
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
+# Android Studio
+*.iml
+.idea
+.gradle
 
-# Folder config file
-Desktop.ini
+# Crashlytics configuations
+com_crashlytics_export_strings.xml
 
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
+# Local configuration file (sdk path, etc)
+local.properties
 
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
+# Gradle generated files
+.gradle/
 
-# Windows shortcuts
-*.lnk
+# Signing files
+.signing/
+
+# User-specific configurations
+.idea/libraries/
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/.name
+.idea/compiler.xml
+.idea/copyright/profiles_settings.xml
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/scopes/scope_settings.xml
+.idea/vcs.xml
+*.iml
+
+# Java class files
+*.class
+#built application files
+*.apk
+*.ap_
+
+# Eclipse project files
+.classpath
+.project
+
+
+
