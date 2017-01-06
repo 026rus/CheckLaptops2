@@ -29,19 +29,21 @@ public class Test {
     		// connecting to Data Base Server.
 			mdb.connectDB();
 
-			String [] laptop = mdb.getEquipment("*");
+			String [] laptop = mdb.getEquipment("5CG5282KVL");
 			
 			for (int i=0; i < laptop.length; i++)
 			{
-				System.out.println("laptop [" + i + "]: " + laptop[i].toString());
+				if (laptop[i] != null) System.out.println("laptop [" + i + "]: " + laptop[i].toString());
+				else System.out.println("laptop [" + i + "]: NULL");
 			}
+			mdb.getLaptopTable();
 
     		// disconnecting from Data Base Server.
 			mdb.disconnectDB();
 		} catch (SQLException e)
 		{
 			// TODO Auto-generated catch block
-			System.out.println("SQL not working SORRY !!!");
+			Utilitis.print("SQL not working SORRY !!!");
 			
 			e.printStackTrace();
 		}

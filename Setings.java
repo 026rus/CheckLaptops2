@@ -13,7 +13,7 @@ public class Setings
 {
 	private Setings(){}
 
-	private static String ServerIP = "15.47.243.46";
+	private static String ServerIP = "15.47.243.49";
 	private static String Serverpass = "hpinvent";
 	private static String Serveruser = "hpadmin";
 	private static String Serverimgfolder = "/kiosk/people/";

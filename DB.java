@@ -31,10 +31,13 @@ public class DB
 
 	public void connectDB() throws SQLException
 	{
-		Utilitis.print("Starting connection");
+		Utilitis.print("Starting connection Sysem get propertis");
 		correntuser	= System.getProperty("user.name");
+		Utilitis.print("additin Dfiver Manager : " + urlDB + ", " +  dbUserName+ ", " + dbUserPassword  );
 		con = DriverManager.getConnection(	urlDB, dbUserName, dbUserPassword  );
+		Utilitis.print("Creating statment");
 		st = con.createStatement();
+		Utilitis.print("Finishing connect");
 	}
 	public void disconnectDB () throws SQLException
 	{

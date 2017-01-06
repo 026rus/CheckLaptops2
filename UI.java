@@ -294,7 +294,14 @@ public class UI extends JFrame
 	
 	private void empOutput(String[] strin)
 	{
-		System.out.println(" Emploee 3 = " + strin[3]);
+		Utilitis.print(" Emploee 3 = " + strin[3]);
+
+		// testing what is inside 
+		for (int i=0; i<strin.length; i++)
+		{
+			Utilitis.print("\t\t STRIN[" + i + "] = \t" + strin[i]);
+		}
+
 		if (strin.length > 7 )
 		{
 			JOptionPane.showMessageDialog(this,
@@ -315,7 +322,8 @@ public class UI extends JFrame
 		{
 			if (i != DBConst.EMP_ID)
 			{
-				int Width = metrics.stringWidth(strin[i])+10;
+				int Width = 0;
+				if (strin[i] != null) Width = metrics.stringWidth(strin[i])+10;
 				if (Width > 265)
 				{
 					Width = 265;
@@ -357,6 +365,7 @@ public class UI extends JFrame
 		URL url;
 		try
 		{
+			Utilitis.print("URL = " + strin[strin.length-1] + " At " + (strin.length-1) );
 			url = new URL(strin[strin.length-1]);
 			Image img = ImageIO.read(url);
 			Image newimg = img.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH);
