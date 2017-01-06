@@ -9,6 +9,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.sql.SQLException;
 import java.awt.*;
 
 import javax.imageio.*;
@@ -16,10 +17,39 @@ import javax.swing.*;
 
 public class Test {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) 
+    {
         new Test();
     }
+    public Test()
+    {
+    	DB mdb = new DB();
+    	try
+		{
+    		// connecting to Data Base Server.
+			mdb.connectDB();
 
+			String [] laptop = mdb.getEquipment("*");
+			
+			for (int i=0; i < laptop.length; i++)
+			{
+				System.out.println("laptop [" + i + "]: " + laptop[i].toString());
+			}
+
+    		// disconnecting from Data Base Server.
+			mdb.disconnectDB();
+		} catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			System.out.println("SQL not working SORRY !!!");
+			
+			e.printStackTrace();
+		}
+    	
+    	
+    }
+
+/*
     public Test() {
         EventQueue.invokeLater(new Runnable() {
             @Override
@@ -43,6 +73,7 @@ public class Test {
         });
     }
 
+*/
     public class CropPane extends JPanel {
 
         /**

@@ -31,21 +31,22 @@ public class DB
 
 	public void connectDB() throws SQLException
 	{
+		Utilitis.print("Starting connection");
 		correntuser	= System.getProperty("user.name");
 		con = DriverManager.getConnection(	urlDB, dbUserName, dbUserPassword  );
 		st = con.createStatement();
 	}
 	public void disconnectDB () throws SQLException
 	{
-            if (rs != null){	rs.close();		}
-            if (st != null){	st.close();		}
+            if (rs != null) {	rs.close();		}
+            if (st != null) {	st.close();		}
             if (con != null){	con.close();	}
 	}
 /* -------------------------------------------------------------------------------------*/	
 	public String[] getEquipment(String equipmentNumber) throws SQLException
 	{
 		connectDB();
-		String coloms = DBConst.LAPTOP_ID + ", "
+		String coloms =   DBConst.LAPTOP_ID + ", "
 						+ DBConst.LAPTOP_TAG + ", "
 						+ DBConst.EMPLOYEE_F_NAME + ", "
 						+ DBConst.EMPLOYEE_L_NAME + ", "
@@ -65,7 +66,6 @@ public class DB
 		
 		while (rs.next())
 		{
-//			Equipment.add(rs.getString(DBConst.LAPTOP_ID));
 			Equipment.add(rs.getString(DBConst.EMPLOYEE_F_NAME));
 			Equipment.add(rs.getString(DBConst.EMPLOYEE_L_NAME));
 			Equipment.add(rs.getString(DBConst.LAPTOP_TAG));
