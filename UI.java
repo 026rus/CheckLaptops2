@@ -216,20 +216,15 @@ public class UI extends JFrame
 			String[] employee = getemployee(inLaptop);
 			if (employee.length < 3)
 			{
-				System.out.println("Not found !!!");
-				int addYesNo = JOptionPane.showConfirmDialog(
-					    this,
-					    Setings.getEnterNewEquipmentMessage(),
-					    "Add LapTop",
-					    JOptionPane.YES_NO_OPTION);
-				if (addYesNo == JOptionPane.YES_OPTION);
-				else 
-					System.out.println("Not wont to add LapTop!!!");
+				Utilitis.print("Not found !!!");
+				// new app will not be ebel to add equipment to DB
+				// TODO need to change it to be just OK dialog box !!!
+				int addYesNo = JOptionPane.showOptionDialog(message, inLaptop, optionType, messageType, icon, options, initialValue)( this, Setings.getEnterNewEquipmentMessage(), "Add LapTop", JOptionPane.OK_OPTION);
 			}
 			else 
 			{
 				for (int i=0; i< employee.length; i++)
-					System.out.println("employee[" + i+ "] = "+ employee[i]);
+					Utilitis.print("employee[" + i+ "] = "+ employee[i]);
 				
 				erase();
 				setMainWindo();

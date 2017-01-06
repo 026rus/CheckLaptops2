@@ -24,7 +24,7 @@ public class Setings
 	private static String MainIcon = "icon-secure.png";
 	private static String FontName = "HP Simplified";
 	private static String DoNotForgetMessage = "Do not forget return Temp Badge!";
-	private static String EnterNewEquipmentMessage = "The equipment you entered is not exist in the database,\nDo you want to add in to the database now.\n";
+	private static String EnterNewEquipmentMessage = "The equipment you entered is not exist in the database\n";
 	private static String ChooseEmployeeMessage = "Please choose employee to assign laptop to.";
 	private static String LaptopExistMessage = "The laptop already exists just assign it tp employee.";
 	private static String LaptopInMessage = "The laptop was checked In and not Out do you want to continue?";
