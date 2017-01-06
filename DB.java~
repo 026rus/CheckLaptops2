@@ -1,0 +1,305 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class DB
+{
+	private Connection con = null;
+	private Statement st = null;
+	private ResultSet rs = null;
+	PreparedStatement ps = null;
+	private String urlDB				= "jdbc:mysql://" + Setings.getServerIP() + ":"+DBConst.PORT+"/" + DBConst.DATABASE_NAME;
+	private String urlDBhttp			= "http://"+ Setings.getServerIP() + "/" + DBConst.DATABASE_NAME;
+	private String urlPeopelfolder		= "/"+ DBConst.PEOPLE_FOLDER +"/";
+	private String dbUserName			= DBConst.DB_USER_NAME;
+	private String dbUserPassword		= DBConst.DB_USER_PASS;
+	private String correntuser			= "";
+	private final String LAPTOP_TABLE_U		= DBConst.UPDATE_LAPTOP_UPDATES;
+	private final String LAPTOP_TABLE_R		= DBConst.UPDATE_LAPTOP_RECORDS;
+	private final String LAPTOP_TABLE_S		= DBConst.UPDATE_LAPTOP_S;
+	
+	private List<String> 	Equipment  = new ArrayList<String>();
+	
+	public void connectDB() throws SQLException
+	{
+		correntuser	= System.getProperty("user.name");
+		con = DriverManager.getConnection(	urlDB, dbUserName, dbUserPassword  );
+		st = con.createStatement();
+	}
+	public void disconnectDB () throws SQLException
+	{
+            if (rs != null){	rs.close();		}
+            if (st != null){	st.close();		}
+            if (con != null){	con.close();	}
+	}
+	
+	public String[] getEquipment(String equipmentNumber) throws SQLException
+	{
+		connectDB();
+		ps = con.prepareStatement("SELECT * FROM "+ DBConst.TABLE_LAPTOP +" WHERE "+DBConst.LAPTOP_TAG+"=?");
+		ps.setString(1, equipmentNumber);
+		
+		rs = ps.executeQuery();
+		
+		while (rs.next())
+		{
+			Equipment.add(rs.getString(DBConst.LAPTOP_TAG));
+			Equipment.add(rs.getString(DBConst.LAPTOP_EMPLOYEE));
+			Equipment.add(rs.getString(DBConst.LAPTOP_NOTES));
+		}
+		
+		disconnectDB ();
+		
+		String[] str = null;
+		if (Equipment.size() == 0) 
+			str = new String [] {"Error"};
+		else if (Equipment != null) 
+		{
+			System.out.println("Inside of bildin Array");
+			str = new String[Equipment.size()];
+
+			Equipment.toArray(str);
+			System.out.println("in Size : " + Equipment.size());
+			System.out.println("in Array : " + str[str.length-1]);
+
+			if ( !str[str.length-1].contains(urlDBhttp) )
+				str[str.length-1] = urlDBhttp + "/"+DBConst.PEOPLE_FOLDER+"/" + str[str.length-1];
+		}
+		return str;
+	}
+	
+	public Object[][] getLaptopTable() throws SQLException
+	{
+		connectDB();
+		ps = con.prepareStatement("SELECT * FROM " + LAPTOP_TABLE_S);
+		rs = ps.executeQuery();
+		
+		int size = 0;
+		int numcol = 4;
+		try
+		{
+		    rs.last();
+		    size = rs.getRow();
+		    rs.beforeFirst();
+		}
+		catch(Exception ex)
+		{
+		}
+		
+		System.out.println("Size of thabel is: " + size);
+		Object[][] temp = new Object[size][numcol];
+		int i=0;
+		while (rs.next())
+		{
+			for (int c=1; c<=numcol; c++)
+				temp[i][c-1] = rs.getString(c);
+			i++;		
+		}
+		System.out.println("Get thrue # = " + i);
+		disconnectDB();
+		return temp;
+	}
+	public String[] getLaptopColomNames()
+	{
+		return new String[] {"ID", "TAG", "Employee", "Notes"};
+	}
+	
+	public boolean updatetLaptop(Laptop nlaptop) throws SQLException
+	{
+		int ID = nlaptop.getId();
+		String 	Tag			= nlaptop.getTag(),
+				Name		= nlaptop.getName(),
+				FirstName 	= nlaptop.getFirstName(),
+				LastName 	= nlaptop.getLastName(),
+				Notes 		= nlaptop.getNotes(),
+				Photo 		= nlaptop.getPhoto();
+		
+		ps = con.prepareStatement("UPDATE "+ LAPTOP_TABLE_S +" SET tag=?, name=?, firstname=?, lastname=?, notes=?, photo=? WHERE id=?");
+		ps.setString(1, Tag);
+		ps.setString(2, Name);
+		ps.setString(3, FirstName);
+		ps.setString(4, LastName);
+		ps.setString(5, Notes);
+		ps.setString(6, Photo);
+		ps.setInt(7, ID);
+		ps.execute();
+		
+		ps = con.prepareStatement("INSERT INTO "+ LAPTOP_TABLE_U + " VALUES(null,  ?, NOW() )");
+		ps.setString(1, correntuser);
+		ps.execute();
+		
+		return true;
+	}
+
+	public boolean addLaptop(Laptop nlaptop) throws SQLException
+	{
+		String 	Tag			= nlaptop.getTag(),
+				Name		= nlaptop.getName(),
+				FirstName 	= nlaptop.getFirstName(),
+				LastName 	= nlaptop.getLastName(),
+				Notes 		= nlaptop.getNotes(),
+				Photo 		= nlaptop.getPhoto();
+		
+		ps = con.prepareStatement("INSERT INTO " + LAPTOP_TABLE_S + " VALUES(null, ?, ?, ?, ?, ?, ? )");
+		ps.setString(1, Tag);
+		ps.setString(2, Name);
+		ps.setString(3, FirstName);
+		ps.setString(4, LastName);
+		ps.setString(5, Notes);
+		ps.setString(6, Photo);
+		ps.execute();
+		
+		ps = con.prepareStatement("INSERT INTO " + LAPTOP_TABLE_U + " VALUES(null,  ?, NOW() )");
+		ps.setString(1, correntuser);
+		ps.execute();
+		
+		return true; 
+	}
+
+	public Laptop getLaptopByID(int ID) throws SQLException
+	{
+		String 	Tag = null,
+				Name = null,
+				FirstName = null,
+				LastName = null,
+				Notes = null,
+				Photo = null;
+		
+		ps = con.prepareStatement("SELECT * FROM " + LAPTOP_TABLE_S + " WHERE id=?");
+		ps.setInt(1, ID);
+		
+		rs = ps.executeQuery();
+		
+		
+		while (rs.next())
+		{
+			Tag 		= rs.getString("tag");
+			Name 		= rs.getString("name");
+			FirstName 	= rs.getString("firstname");
+			LastName 	= rs.getString("lastname");
+			Notes 		= rs.getString("notes");
+			Photo 		= rs.getString("photo");
+		}
+				
+		return new Laptop(ID, Tag, Name, FirstName, LastName, Notes, Photo );
+	}
+	
+	public void deleteLaptopByID(int ID) throws SQLException
+	{
+		ps = con.prepareStatement("DELETE FROM " + LAPTOP_TABLE_S + " WHERE id=?");
+		ps.setInt(1, ID);
+		ps.execute();
+
+		ps = con.prepareStatement("INSERT INTO " + LAPTOP_TABLE_U + " VALUES(null,  ?, NOW() )");
+		ps.setString(1, correntuser);
+		ps.execute();
+		
+	}
+
+	public void addEquipment(String tag, String name, String firstname, String lastname, String notes, String photo) throws SQLException
+	{
+		
+		connectDB();
+		ps = con.prepareStatement("INSERT INTO " + LAPTOP_TABLE_S + " VALUES(NULL, ?, ?, ?, ?, ?, ?)");
+		ps.setString(1, tag);
+		ps.setString(2, name);
+		ps.setString(3, firstname);
+		ps.setString(4, lastname);
+		ps.setString(5, notes);
+		ps.setString(6, photo);
+		
+		ps.execute();
+		
+		disconnectDB ();
+	}
+	
+	public void addRecord(String tag, String firstname, String lastname) throws SQLException
+	{
+		
+		connectDB();
+		ps = con.prepareStatement("INSERT INTO " + LAPTOP_TABLE_R + " VALUES(NULL, ?, ?, ?, NOW(), NULL)");
+		ps.setString(1, tag);
+		ps.setString(2, firstname);
+		ps.setString(3, lastname);
+		
+		ps.execute();
+		
+		disconnectDB ();
+	}
+	
+	public void addExitRecord(String tag) throws SQLException
+	{
+		connectDB();
+		ps = con.prepareStatement("UPDATE " + LAPTOP_TABLE_R + " SET dateout = NOW() "
+				+ "WHERE dateout is NULL AND teg=? ORDER BY datein DESC LIMIT 1");
+		ps.setString(1, tag);
+		ps.execute();
+		disconnectDB ();
+	}
+	
+	public boolean haveTempBadge(String fname, String lname) throws SQLException
+	{
+		List<String> 	employee  = new ArrayList<String>();
+		connectDB();
+		ps = con.prepareStatement("select * from records "
+				+ "WHERE true "
+//				+ "DATE_SUB(CURDATE(), INTERVAL 5 DAY) <= datein "
+				+ "AND tempbadge IS NOT NULL AND dateout IS NULL "
+				+ "AND firstname=?"
+				+ "AND lastname=?;");
+		
+		ps.setString(1, fname);
+		ps.setString(2, lname);
+		rs = ps.executeQuery();
+		
+		while (rs.next())
+		{
+			employee.add(rs.getString("id"));
+			employee.add(rs.getString("firstname"));
+			employee.add(rs.getString("lastname"));
+			employee.add(rs.getString("company"));
+			employee.add(rs.getString("country"));
+			employee.add(rs.getString("reason"));
+			employee.add(rs.getString("sponsor"));
+			employee.add(rs.getString("datein"));
+			employee.add(rs.getString("tempbadge"));
+		}
+		
+		disconnectDB ();
+		
+		if (employee != null)
+		{
+			for (int i=0; i<employee.size(); ++i)
+				System.out.println("\t=>\t" + employee.get(i));
+		}
+		
+		if (employee.size() > 0)
+			return true;
+		else 
+			return false;		
+	}
+	/*  */ 
+	public String getUrlDBhttp()
+	{
+		return urlDBhttp;
+	}
+	public void setUrlDBhttp(String urlin)
+	{
+		urlDBhttp = urlin;
+	}
+	public String getUrlPeopelfolder()
+	{
+		return urlPeopelfolder;
+	}
+	public void setUrlPeopelfolder(String urlPeopelfolder)
+	{
+		this.urlPeopelfolder = urlPeopelfolder;
+	}
+	
+}

@@ -1,0 +1,87 @@
+
+public class Setings
+{
+	private static String ServerIP = "15.47.243.46";
+	private static String Serverpass = "hpinvent";
+	private static String Serveruser = "hpadmin";
+	private static String Serverimgfolder = "/kiosk/people/";
+	private static String Serverimgfullfolder = "/var/www/kiosk/people/";
+	private static String DefoultePhoto = "000012.png";
+	private static String BackgroundImg = "background.png";
+	private static String LaptopIconFile = "laptop_256.png";
+	private static String MainIcon = "icon-secure.png";
+	private static String FontName = "HP Simplified";
+	private static String DoNotForgetMessage = "Do not forget return Temp Badge!";
+	private static String EnterNewEquipmentMessage = "The equipment you entered is not exist in the database,\nDo you want to add in to the database now.\n";
+	private static String ChooseEmployeeMessage = "Please choose employee to assign laptop to.";
+	private static String LaptopExistMessage = "The laptop already exists just assign it tp employee.";
+	private static String LaptopInMessage = "The laptop was checked In and not Out do you want to continue?";
+	private static String LaptopOutMessage = "The laptop was checked Out and not In do you want to continue?";
+	private static String AboutMessage = "01110011 01101111 01110010 01110010 01111001 00100000 01101110 01101111\n"
+		    								+ "00100000 01101001 00100000 01100100 01101001 01100100 01101110 00100111\n"
+										    + "01110100 00100000 01101000 01100001 01110110 01100101 00100000 01110100\n"
+										    + "01101001 01101101 01100101 00100000 01110100 01101111 00100000 01110111\n"
+										    + "01110010 01101001 01110100 01100101 00100000 01101000 01100101 01101100\n"
+										    + "01110000 00101110 00100000 01001001 01110100 00100000 01101101 01100001\n"
+										    + "01111001 00100000 01100010 01100101 00100000 01101000 01100101 01110010\n"
+										    + "01100101 00100000 01101001 01101110 00100000 01101110 01100101 01111000\n"
+										    + "01110100 00100000 01110110 01100101 01110010 01110011 01101001 01101111\n"
+										    + "01101110 00001010\n\n"
+										    + "01000111 01101111 01101111 01100100 00100000 01101100 01110101 01100011\n"
+										    + "01101011 00100001";
+
+	private static String EnterTheTagPromt = "Please enter the TAG: ";
+	private static String EquipmentName = "Laptop";
+	
+	
+	public static final int LAPTOP_ID 			= 0;
+	public static final int LAPTOP_TAG 			= 1;
+	public static final int LAPTOP_EMPLOYEE_ID 	= 2;
+	public static final int LAPTOP_NOTES 		= 3;
+
+	public static final int EMPLOYEE_ID 			= 0;
+	public static final int EMPLOYEE_FIRST_NAME 	= 1;
+	public static final int EMPLOYEE_MIDDLE_NAME 	= 2;
+	public static final int EMPLOYEE_LAST_NAME 		= 3;
+	public static final int EMPLOYEE_EMAIL 			= 4;
+	public static final int EMPLOYEE_PHOTO 			= 5;
+
+	private Setings(){}
+	
+	public static String getServerIP()						{ return ServerIP; }
+	public static String getServerpass()					{ return Serverpass; }
+	public static String getServeruser()					{ return Serveruser; }
+	public static String getServerimgfolder()				{ return Serverimgfolder; }
+	public static String getServerimgfullfolder() 			{ return Serverimgfullfolder; }
+	public static String getDefoultePhoto() 				{ return DefoultePhoto; }
+	public static String getLaptopIconFile() 				{ return LaptopIconFile; }
+	public static String getBackgroundImg()					{ return BackgroundImg; }
+	public static String getFontName()						{ return FontName; }
+	public static String getMainIcon()						{ return MainIcon; }
+	public static String getDoNotForgetMessage()			{ return DoNotForgetMessage; }
+	public static String getAboutMessage()					{ return AboutMessage; }
+	public static String getEnterTheTagPromt()				{ return EnterTheTagPromt; }
+	public static String getEquipmentName()					{ return EquipmentName; }
+	public static String getEnterNewEquipmentMessage()		{ return EnterNewEquipmentMessage; }
+	public static String getChooseEmployeeMessage()			{ return ChooseEmployeeMessage; }
+	public static String getLaptopExistMessage() 			{ return LaptopExistMessage; }
+	public static String getLaptopInMessage() 				{ return LaptopInMessage; } 
+	public static String getLaptopOutMessage()				{ return LaptopOutMessage; }
+
+	public static void setServerIP(String str)				{ ServerIP = str; }
+	public static void setServerpass(String str) 		 	{ Serverpass = str; }
+	public static void setServeruser(String str) 		 	{ Serveruser = str; }
+	public static void setServerimgfolder(String str)		{ Serverimgfolder = str; }
+	public static void setServerimgfullfolder(String str) 	{ Serverimgfullfolder = str; }
+	public static void setDefoultePhoto(String str) 		{ DefoultePhoto = str; }
+	public static void setBackgroundImg(String str)			{ BackgroundImg = str; }
+	public static void setLaptopIconFile(String str)		{ LaptopIconFile = str; 	}
+	public static void setFontName(String str)				{ FontName = str; }
+	public static void setMainIcon(String str)				{ MainIcon = str; }
+	public static void setDoNotForgetMessage(String str)	{ DoNotForgetMessage = str; }
+	public static void setAboutMessage(String str)			{ AboutMessage = str; }
+	public static void setEnterTheTagPromt(String str)		{ EnterTheTagPromt = str; }
+	public static void setEquipmentName(String str)			{ EquipmentName = str; }
+	public static void setEnterNewEquipmentMessage(String str)		{ EnterNewEquipmentMessage = str; }
+	public static void setChooseEmployeeMessage(String str)			{ ChooseEmployeeMessage = str; }
+}

@@ -1,0 +1,39 @@
+
+public class DBConst
+{
+	private DBConst(){}
+	
+	public static final String DATABASE_NAME 			= "kiosk";
+	
+	public static final String TABLE_LAPTOP 			= "laptops";
+	public static final String TABLE_EMPLOYEE 			= "employee"; 
+	public static final String TABLE_RECOREDS 			= "laptoprecords";
+	
+	public static final String LAPTOP_ID 				= "id";
+	public static final String LAPTOP_TAG 				= "tag";
+	public static final String LAPTOP_EMPLOYEE 			= "employee_id";
+	public static final String LAPTOP_NOTES 			= "notes";
+
+	public static final String EMPLOYEE_ID 				= "id";
+	public static final String EMPLOYEE_F_NAME 			= "first_name";
+	public static final String EMPLOYEE_L_NAME 			= "last_name";
+	public static final String EMPLOYEE_M_NAME 			= "middle_name";
+	public static final String EMPLOYEE_EMAIL 			= "email";
+	public static final String EMPLOYEE_PHOTO 			= "photo";
+
+	public static final String RECORDS_ID 				= "id";
+	public static final String RECORDS_TAG 				= "tag";
+	public static final String RECORDS_EMPLOYEE 		= "employee";
+	public static final String RECORDS_DATEIN 			= "datein";
+	public static final String RECORDS_DATEOUT 			= "dateout"; 
+
+	public static final String DB_USER_NAME 			= "kioskuser";
+	public static final String DB_USER_PASS 			= "kioskuser";
+
+	public static final String UPDATE_LAPTOP_UPDATES	= "laptopupdates";
+	public static final String UPDATE_LAPTOP_RECORDS	= "laptoprecords";
+	public static final String UPDATE_LAPTOP_S			= "laptops";
+
+	public static final String PEOPLE_FOLDER			= "people";
+	public static final String PORT						= "3306";
+}

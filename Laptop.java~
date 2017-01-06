@@ -1,0 +1,62 @@
+
+public class Laptop
+{
+	int id;
+	String tag;
+	String name;
+	String firstName;
+	String lastName;
+	String notes;
+	String photo;
+	
+	
+	public Laptop()	{	}
+	
+	public Laptop(String tag, String name, String firstName, String lastName, String notes, String photo)
+	{
+		this.tag = tag;
+		this.name = name;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.notes = notes;
+		this.photo = photo;
+	}
+	
+	public Laptop(String id, String tag, String name, String firstName, String lastName, String notes, String photo)
+	{
+		
+		int i = Integer.parseInt(id);
+		this.id = i;
+		this.tag = tag;
+		this.name = name;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.notes = notes;
+		this.photo = photo;
+	}
+
+	public Laptop(int id, String tag, String name, String firstName, String lastName, String notes, String photo)
+	{
+		this.id = id;
+		this.tag = tag;
+		this.name = name;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.notes = notes;
+		this.photo = photo;
+	}
+	public int getId(){ return id;}
+	public void setId(int id){this.id = id;}
+	public String getTag(){return tag;}
+	public void setTag(String tag){this.tag = tag;}
+	public String getName(){return name;}
+	public void setName(String name){this.name = name;}
+	public String getFirstName(){return firstName;}
+	public void setFirstName(String firstName){this.firstName = firstName;}
+	public String getLastName(){return lastName;}
+	public void setLastName(String lastName){this.lastName = lastName;}
+	public String getNotes(){return notes;}
+	public void setNotes(String notes){this.notes = notes;}
+	public String getPhoto(){return photo;}
+	public void setPhoto(String photo){this.photo = photo;}
+}
